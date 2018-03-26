@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>application-monitor</artifactId>
+        <groupId>club.throwable</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>spring-boot-starter-application-monitor</artifactId>
+    <packaging>jar</packaging>
+    <name>spring-boot-starter-application-monitor</name>
+    <dependencies>
+
+        <dependency>
+            <groupId>club.throwable</groupId>
+            <artifactId>thread-monitor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>club.throwable</groupId>
+            <artifactId>os-monitor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>club.throwable</groupId>
+            <artifactId>monitor-console</artifactId>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <finalName>spring-boot-starter-application-monitor</finalName>
+    </build>
+</project>

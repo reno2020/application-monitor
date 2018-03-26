@@ -1,0 +1,9 @@
+server:
+  port: 9100
+spring:
+  application:
+    name: monitor
+  freemarker:
+    request-context-attribute: request
+application-monitor:console.username: doge
+application-monitor.console.password: 123456
