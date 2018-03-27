@@ -1,0 +1,33 @@
+{
+  "threadPoolList": [
+    {
+      "beanName": "threadPool1",
+      "corePoolSize": 5,
+      "maximumPoolSize": 10,
+      "keepAliveSecond": 0,
+      "allowCoreThreadTimeOut": false,
+      "rejectedExecutionPolicy": "ThreadPoolExecutor.AbortPolicy",
+      "blockingTaskCount": 0,
+      "taskCount": 0,
+      "completedTaskCount": 0,
+      "activeCount": 0,
+      "largestPoolSize": 0,
+      "poolSize": 0
+    },
+    {
+      "beanName": "threadPool2",
+      "corePoolSize": 10,
+      "maximumPoolSize": 20,
+      "keepAliveSecond": 0,
+      "allowCoreThreadTimeOut": false,
+      "rejectedExecutionPolicy": "ThreadPoolExecutor.AbortPolicy",
+      "blockingTaskCount": 0,
+      "taskCount": 0,
+      "completedTaskCount": 0,
+      "activeCount": 0,
+      "largestPoolSize": 0,
+      "poolSize": 0
+    }
+  ],
+  "context": ""
+}

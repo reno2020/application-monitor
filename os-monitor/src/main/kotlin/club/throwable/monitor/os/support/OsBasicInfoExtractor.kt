@@ -13,7 +13,7 @@ class OsBasicInfoExtractor {
     fun extractOsBasicInfo(): OsBasicInfo {
         val runtime = Runtime.getRuntime()
         val info = OsBasicInfo()
-        info.processorNumner = runtime.availableProcessors()
+        info.processorNumber = runtime.availableProcessors()
         return info
     }
 }

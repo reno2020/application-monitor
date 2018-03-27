@@ -5,5 +5,5 @@ spring:
     name: monitor
   freemarker:
     request-context-attribute: request
-application-monitor:console.username: doge
-application-monitor.console.password: 123456
+throwable-monitor:console.username: doge
+throwable-monitor.console.password: 123456

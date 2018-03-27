@@ -1,5 +1,6 @@
 package club.throwable.monitor.console.configuration
 
+import club.throwable.monitor.os.common.OsMonitorConstant
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 /**
@@ -10,11 +11,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties
  */
 @ConfigurationProperties(prefix = MonitorConsoleProperties.PREFIX)
 class MonitorConsoleProperties(
-        var username: String? = null,
-        var password: String? = null
+        var username: String = IDENTITY,
+        var password: String = IDENTITY,
+        var diskThreshold: Long = DISK_THRESHOLD,
+        var memoryThreshold: Long = MEMORY_THRESHOLD
 ) {
 
     companion object {
-        const val PREFIX = "application-monitor.console"
+        const val IDENTITY = "admin"
+        const val PREFIX = "throwable-monitor.console"
+        const val DISK_THRESHOLD = OsMonitorConstant.DISK_THRESHOLD
+        const val MEMORY_THRESHOLD = OsMonitorConstant.MEMORY_THRESHOLD
     }
 }

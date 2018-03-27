@@ -1,14 +1,14 @@
 <div class="col-sm-12">
-    <h3 class="data-title">系统信息</h3>
+    <h3 class="data-title">系统监控</h3>
     <div>
         <h3 class="data-sub-title">基本信息</h3>
         <div class="table-responsive">
-            <table class="table table-bordered" style="width: 40%">
+            <table class="table table-bordered" style="width: 40%;text-align: center">
                 <tbody>
                 {{if osBasicInfo}}
                 <tr class="info">
                     <td>CPU逻辑核心数目</td>
-                    <td>{{osBasicInfo.processorNumner}}</td>
+                    <td>{{osBasicInfo.processorNumber}}</td>
                 </tr>
                 {{/if}}
                 </tbody>
@@ -18,7 +18,7 @@
     <div>
         <h3 class="data-sub-title">内存信息</h3>
         <div class="table-responsive">
-            <table class="table table-bordered" style="width: 60%">
+            <table class="table table-bordered" style="width: 60%;text-align: center">
                 <tbody>
                 {{if physicalMemorySpaceInfo}}
                 <tr class="info">
@@ -44,7 +44,7 @@
     <div>
         <h3 class="data-sub-title">磁盘信息</h3>
         <div class="table-responsive">
-            <table class="table table-bordered" style="width: 80%">
+            <table class="table table-bordered" style="width: 100%;text-align: center">
                 <thead>
                 <tr class="success">
                     <td>磁盘路径</td>

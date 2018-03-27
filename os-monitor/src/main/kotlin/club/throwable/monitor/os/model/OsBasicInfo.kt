@@ -7,5 +7,5 @@ package club.throwable.monitor.os.model
  * @since 2018/3/27 16:15
  */
 class OsBasicInfo(
-        var processorNumner: Int? = null
+        var processorNumber: Int? = null
 )

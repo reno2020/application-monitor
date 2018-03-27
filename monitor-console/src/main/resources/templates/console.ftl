@@ -1,4 +1,4 @@
-<#assign base = request.contextPath >
+<#assign base = request.contextPath>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,24 +50,22 @@
     <div class="container-fluid all">
         <div class="sidebar">
             <ul class="nav">
-                <li><a href="#" onclick="loadDashboard('${base}/tpl/dashboard-content.tpl')">Dashboard</a></li>
-                <li><a href="#" onclick="loadSystemInfo('${base}/tpl/system-content.tpl','${base}/monitor/os')">系统信息</a></li>
-                <li><a href="message.html">Message库</a></li>
-                <li><a href="ui.html">UI库</a></li>
-                <li><a href="animate.html">Animate库</a></li>
-                <li><a href="carousel.html">Carousel库</a></li>
-                <li><a href="chart.html">Chart库</a></li>
+                <li class="active"><a href="#"
+                                      onclick="loadDashboard('${base}/tpl/dashboard-content.tpl')">Dashboard</a></li>
+                <li><a href="#" onclick="loadSystemInfo('${base}/tpl/system-content.tpl','${base}/monitor/os')">系统监控</a>
+                </li>
                 <li class="has-sub">
-                    <a href="javascript:void(0);"><span>导航选中演示</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                    <a href="javascript:void(0);"><span>线程监控</span><i
+                            class="fa fa-caret-right fa-fw pull-right"></i></a>
                     <ul class="sub-menu">
-                        <li><a href="left1.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;left1</a></li>
-                        <li><a href="left2.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;left2</a></li>
-                        <li><a href="left3.html"><i class="fa fa-circle-o fa-fw"></i>&nbsp;left3及子页面</a></li>
+                        <li><a href="#"
+                               onclick="loadThreadPoolInfo('${base}/tpl/thread-pool-content.tpl','${base}/monitor/thread/metadata/list','${base}')"><i
+                                class="fa fa-circle-o fa-fw"></i>&nbsp;线程池监控</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="maincontent row" id="main-content">
+        <div class="main-content row" id="main-content">
             <div class="col-sm-12">
                 <h3 class="data-title">系统信息</h3>
                 <div>
@@ -128,7 +126,7 @@
             </div>
         </div>
         <hr>
-        <footer>
+        <footer class="footer navbar-fixed-bottom">
             <p style="text-align: center">
                 <a href="https://github.com/zjcscut" target="_blank">
                     <i class="fa fa-2x fa-github"></i>
@@ -142,5 +140,29 @@
 <#--<a href="https://github.com/zjcscut">-->
 <#--<img class="forkme" src="${base}/img/forkme.png" alt="Fork me on GitHub">-->
 <#--</a>-->
+
+<div class="modal fade" id="purge-task-queue-modal" tabindex="-1" role="dialog"
+     aria-labelledby="purge-task-queue-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="purge-task-queue-modal-label">
+                    警告
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input hidden id="thread-pool-bean-name-text"/>
+                你确定清空线程池任务队列吗?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="confirmPurgeTaskQueue('${base}/monitor/thread/purge')">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

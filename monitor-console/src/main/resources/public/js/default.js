@@ -45,8 +45,8 @@ var pageInitModule = (function (mod) {
     };
     mod.setSidebar = function () {
         $('[data-target="sidebar"]').click(function () {
-            var asideleft = $(".sidebar").offset().left;
-            if (asideleft == 0) {
+            var asideLeft = $(".sidebar").offset().left;
+            if (asideLeft === 0) {
                 $(".sidebar").animate({left: -220});
                 $(".all").animate({marginLeft: 0});
             }
@@ -58,25 +58,25 @@ var pageInitModule = (function (mod) {
         $(".has-sub>a").click(function () {
             $(this).parent().siblings().find(".sub-menu").slideUp();
             $(this).parent().find(".sub-menu").slideToggle();
-        })
-        var _strcurrenturl = window.location.href.toLowerCase();
+        });
+        var currentUrl = window.location.href.toLowerCase();
         $(".navbar-nav a[href],.sidebar a[href]").each(function () {
             var href = $(this).attr("href").toLowerCase();
             var isActive = false;
             $(".breadcrumb>li a[href]").each(function (index) {
-                if (href == $(this).attr("href").toLowerCase()) {
+                if (href === $(this).attr("href").toLowerCase()) {
                     isActive = true;
                     return false;
                 }
-            })
-            if (_strcurrenturl.indexOf(href) > -1 || isActive) {
+            });
+            if (currentUrl.indexOf(href) > -1 || isActive) {
                 $(this).parent().addClass("active");
-                if ($(this).parents("ul").attr("class") == "sub-menu") {
+                if ($(this).parents("ul").attr("class") === "sub-menu") {
                     $(this).parents("ul").slideDown();
                     $(this).parents(".has-sub").addClass("active");
                 }
             }
-        })
+        });
     };
     return mod;
 })(window.pageInitModule || {});
@@ -89,6 +89,15 @@ $(function () {
     var copyRight = '&copy; 2016-' + getCurrentYear() + ' Throwable. All Rights Reserved.Contact me:739805340@qq.com';
     $('#copy-right').html(copyRight);
 });
+
+
+function fixActiveStatus() {
+    $(this).parent().addClass("active");
+    if ($(this).parents("ul").attr("class") === "sub-menu") {
+        $(this).parents("ul").slideDown();
+        $(this).parents(".has-sub").addClass("active");
+    }
+}
 
 function loadDashboard(tpl) {
     $(function () {
@@ -109,10 +118,62 @@ function loadSystemInfo(tpl, url) {
                 method: "GET",
                 dataType: 'json',
                 success: function (data) {
-                    console.log("response data ===> " + JSON.stringify(data));
                     $('#main-content').html(render(data))
                 }
             });
         });
     });
+}
+
+function loadThreadPoolInfo(tpl, url, context) {
+    $(function () {
+        $.get(tpl, function (result) {
+            var render = template.compile(result);
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    console.log("context ==> " + context);
+                    console.log("data ==> " + JSON.stringify(data));
+                    var ex = $.extend({}, data, {'context': context});
+                    console.log("extend data ==> " + JSON.stringify(ex));
+                    $('#main-content').html(render(data))
+                }
+            });
+        });
+    });
+}
+
+function purgeTaskQueue(btn) {
+    var tr = btn.parentNode.parentNode;
+    var tds = tr.getElementsByTagName('td');
+    var td = tds[0];
+    var beanName = td.innerHTML;
+    $('#thread-pool-bean-name-text').val(beanName);
+    $('#purge-task-queue-modal').modal('show');
+}
+
+function confirmPurgeTaskQueue(url) {
+    var beanName = $('#thread-pool-bean-name-text').val();
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+            beanName: beanName
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#purge-task-queue-modal').modal('hide');
+            if (data && !data.result) {
+                alert("清空线程池[" + beanName + "]任务队列失败!");
+            }
+        }
+    });
+}
+
+
+function updateThreadPool() {
+
+
 }

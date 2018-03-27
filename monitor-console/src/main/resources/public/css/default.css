@@ -19,8 +19,8 @@
 .sidebar .sub-menu li a { padding: 15px 30px; text-decoration: none; display: block; background-color: #fff; }
 .sidebar .sub-menu li[class*=active] > a { color: #00acac !important; }
 
-.maincontent { width: 100%; height: 100%; margin: 0 auto; min-width: 320px !important; overflow: hidden; }
-.maincontent .breadcrumb { padding: 14px 15px; }
+.main-content { width: 100%; height: 100%; margin: 0 auto; min-width: 320px !important; overflow: hidden; }
+.main-content .breadcrumb { padding: 14px 15px; }
 
 #goTop { padding: 5px 15px; border-radius: 8px; position: fixed; right: 20px; bottom: 20px; display: none; background-color: #aaa; color: #fff; text-align: center; display: none; -moz-transition: background 0.5s linear; -webkit-transition: background 0.5s linear; -o-transition: background 0.5s linear; transition: background 0.5s linear; z-index: 99; }
 #goTop:hover { background: #808080; }
