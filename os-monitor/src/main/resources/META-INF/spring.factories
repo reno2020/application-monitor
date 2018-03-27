@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+club.throwable.monitor.os.configuration.OsMonitorAutoConfiguration,\
+club.throwable.monitor.os.web.OsMonitorController

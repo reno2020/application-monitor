@@ -60,12 +60,3 @@ object JwtUtils {
         }
     }
 }
-
-fun main(vararg arg: String) {
-    val user = CurrentLoginUser("doge", "123456")
-    val token = JwtUtils.encrypt(user)
-    println(token)
-    TimeUnit.SECONDS.sleep(2)
-    val decrypt = JwtUtils.decrypt(token, CurrentLoginUser::class.java)
-    println(decrypt)
-}

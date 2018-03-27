@@ -21,6 +21,16 @@
             <artifactId>java-jwt</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>club.throwable</groupId>
+            <artifactId>os-monitor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>club.throwable</groupId>
+            <artifactId>thread-monitor</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>monitor-console</finalName>

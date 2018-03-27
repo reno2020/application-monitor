@@ -42,11 +42,14 @@ class MonitorConsoleController {
     @PostMapping(value = ["/login"])
     fun login(@RequestParam(value = "username") username: String,
               @RequestParam(value = "password") password: String,
-              response: HttpServletResponse): ModelAndView {
+              response: HttpServletResponse,
+              request: HttpServletRequest): ModelAndView {
         val mav = ModelAndView()
         if (monitorConsoleProperties.username == username && monitorConsoleProperties.password == password) {
             val cookie = Cookie(ApplicationMonitorConstant.TOKEN_NAME, JwtUtils.encrypt(CurrentLoginUser(username, password)))
             response.addCookie(cookie)
+            request.session.setAttribute("currentUser", username)
+            mav.addObject("currentUser", username)
             mav.viewName = "console"
         } else {
             mav.viewName = "login"
@@ -71,8 +74,9 @@ class MonitorConsoleController {
     }
 
     @GetMapping(value = ["/console"])
-    fun console(): ModelAndView {
+    fun console(request: HttpServletRequest): ModelAndView {
         val mav = ModelAndView()
+        mav.addObject("currentUser", request.session.getAttribute("currentUser"))
         mav.addObject("OPEN_THREAD_MONITOR", OPEN_THREAD_MONITOR)
         mav.addObject("OPEN_OS_MONITOR", OPEN_OS_MONITOR)
         mav.viewName = "console"
