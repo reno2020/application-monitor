@@ -13,11 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  */
 class MonitorConsoleWebMvcConfigurer : WebMvcConfigurer {
 
-    @Autowired
-    private lateinit var consoleTokenInterceptor: ConsoleTokenInterceptor
-
-    override fun addInterceptors(registry: InterceptorRegistry?) {
-        registry!!.addInterceptor(consoleTokenInterceptor).addPathPatterns("/**")
-        super.addInterceptors(registry)
-    }
+//    @Autowired
+//    private lateinit var consoleTokenInterceptor: ConsoleTokenInterceptor
+//
+//    override fun addInterceptors(registry: InterceptorRegistry?) {
+//        registry!!.addInterceptor(consoleTokenInterceptor).addPathPatterns("/**")
+//        super.addInterceptors(registry)
+//    }
 }

@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(value = [MonitorConsoleProperties::class])
 class MonitorConsoleAutoConfiguration {
 
-    @Bean
-    fun consoleTokenInterceptor(): ConsoleTokenInterceptor {
-        return ConsoleTokenInterceptor()
-    }
+//    @Bean
+//    fun consoleTokenInterceptor(): ConsoleTokenInterceptor {
+//        return ConsoleTokenInterceptor()
+//    }
 
     @Bean
     fun monitorConsoleWebMvcConfigurer(): MonitorConsoleWebMvcConfigurer {
