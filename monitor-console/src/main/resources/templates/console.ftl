@@ -24,6 +24,9 @@
     <script type="text/javascript" src="${base}/js/template.js"></script>
     <!--自定义js-->
     <script type="text/javascript" src="${base}/js/default.js"></script>
+    <!--toastr-消息框插件-->
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -140,29 +143,8 @@
 <#--<a href="https://github.com/zjcscut">-->
 <#--<img class="forkme" src="${base}/img/forkme.png" alt="Fork me on GitHub">-->
 <#--</a>-->
-
-<div class="modal fade" id="purge-task-queue-modal" tabindex="-1" role="dialog"
-     aria-labelledby="purge-task-queue-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="purge-task-queue-modal-label">
-                    警告
-                </h4>
-            </div>
-            <div class="modal-body">
-                <input hidden id="thread-pool-bean-name-text"/>
-                你确定清空线程池任务队列吗?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="confirmPurgeTaskQueue('${base}/monitor/thread/purge')">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 外部引入的模态框 -->
+<#include "purge-task-queue-modal.ftl">
+<#include "update-thread-pool-modal.ftl">
 </body>
 </html>

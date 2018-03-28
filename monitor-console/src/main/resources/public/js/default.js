@@ -134,10 +134,6 @@ function loadThreadPoolInfo(tpl, url, context) {
                 method: "GET",
                 dataType: 'json',
                 success: function (data) {
-                    console.log("context ==> " + context);
-                    console.log("data ==> " + JSON.stringify(data));
-                    var ex = $.extend({}, data, {'context': context});
-                    console.log("extend data ==> " + JSON.stringify(ex));
                     $('#main-content').html(render(data))
                 }
             });
@@ -150,12 +146,14 @@ function purgeTaskQueue(btn) {
     var tds = tr.getElementsByTagName('td');
     var td = tds[0];
     var beanName = td.innerHTML;
-    $('#thread-pool-bean-name-text').val(beanName);
+    $('#purge-task-queue-thread-pool-bean-name-text').val(beanName);
+    var message = '即将清空线程池[' + beanName + ']的任务队列。请在知悉风险的前提下按[确定]按钮执行操作！';
+    $('#purge-task-queue-thread-pool-message').html(message);
     $('#purge-task-queue-modal').modal('show');
 }
 
 function confirmPurgeTaskQueue(url) {
-    var beanName = $('#thread-pool-bean-name-text').val();
+    var beanName = $('#purge-task-queue-thread-pool-bean-name-text').val();
     $.ajax({
         url: url,
         method: "POST",
@@ -165,15 +163,74 @@ function confirmPurgeTaskQueue(url) {
         dataType: 'json',
         success: function (data) {
             $('#purge-task-queue-modal').modal('hide');
+            var content;
             if (data && !data.result) {
-                alert("清空线程池[" + beanName + "]任务队列失败!");
+                content = "清空线程池[" + beanName + "]任务队列失败!";
+                toastr.error(content, '警告！');
+            } else {
+                content = "清空线程池[" + beanName + "]任务队列成功!";
+                toastr.success(content, '操作成功！');
+                loadThreadPoolInfo('/tpl/thread-pool-content.tpl', '/monitor/thread/metadata/list');
             }
         }
     });
 }
 
+function updateThreadPool(btn) {
+    var tr = btn.parentNode.parentNode;
+    var tds = tr.getElementsByTagName('td');
+    var td = tds[0];
+    var beanName = td.innerHTML;
+    $('#update-thread-pool-bean-name-text').val(beanName);
+    $('#core-pool-size-text').val(tds[1].innerHTML);
+    $('#maximum-pool-size-text').val(tds[2].innerHTML);
+    $('#keep-alive-second-text').val(tds[3].innerHTML);
+    var allow = tds[4].innerHTML === 'true';
+    if (allow) {
+        var allowRadio = $('#allow-core-thread-timeout-true');
+        allowRadio.parent('label').addClass('active');
+        allowRadio.prop('checked', 'checked');
+    } else {
+        var notAllowRadio = $('#allow-core-thread-timeout-false');
+        notAllowRadio.parent('label').addClass('active');
+        notAllowRadio.prop('checked', 'checked');
+    }
+    $('#update-thread-pool-modal').modal('show');
+}
 
-function updateThreadPool() {
-
-
+function confirmUpdateThreadPool(url) {
+    var beanName = $('#update-thread-pool-bean-name-text').val();
+    var allowCoreThreadTimeout = $('input[name="allow-core-thread-timeout-text"]:checked').val();
+    var corePoolSize = $('#core-pool-size-text').val();
+    var maximumPoolSize = $('#maximum-pool-size-text').val();
+    var keepAliveSecond = $('#keep-alive-second-text').val();
+    if (allowCoreThreadTimeout === 'true' && keepAliveSecond <= 0) {
+        $('#update-thread-pool-modal').modal('hide');
+        toastr.error('允许核心线程超时，存活间隔(秒)必须大于0', '操作失败！');
+        return;
+    }
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+            beanName: beanName,
+            allowCoreThreadTimeOut: allowCoreThreadTimeout,
+            corePoolSize: corePoolSize,
+            maximumPoolSize: maximumPoolSize,
+            keepAliveSecond: keepAliveSecond
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#update-thread-pool-modal').modal('hide');
+            var content;
+            if (data && !data.result) {
+                content = "更新线程池[" + beanName + "]属性失败！";
+                toastr.error(content, '警告！');
+            } else {
+                content = "更新线程池[" + beanName + "]属性成功！";
+                toastr.success(content, '操作成功！');
+                loadThreadPoolInfo('/tpl/thread-pool-content.tpl', '/monitor/thread/metadata/list');
+            }
+        }
+    });
 }

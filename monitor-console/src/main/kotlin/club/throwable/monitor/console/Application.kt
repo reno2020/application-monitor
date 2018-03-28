@@ -1,5 +1,6 @@
 package club.throwable.monitor.console
 
+import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit
  * @since 2018/3/26 16:07
  */
 @SpringBootApplication
-class Application {
+class Application : CommandLineRunner {
 
     @Bean(value = ["threadPool1"])
     fun threadPool1(): ThreadPoolExecutor {
@@ -26,6 +27,14 @@ class Application {
     fun threadPool2(): ThreadPoolExecutor {
         return ThreadPoolExecutor(10, 20, 0, TimeUnit.SECONDS,
                 LinkedBlockingQueue(50))
+    }
+
+    override fun run(vararg args: String?) {
+        for (i in 1..20) {
+            threadPool1().execute({
+                TimeUnit.SECONDS.sleep(10000)
+            })
+        }
     }
 }
 

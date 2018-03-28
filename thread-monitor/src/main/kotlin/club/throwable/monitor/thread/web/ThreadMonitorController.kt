@@ -8,7 +8,10 @@ import club.throwable.monitor.thread.support.ThreadMonitorManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
 /**
  * @author throwable
@@ -38,7 +41,12 @@ class ThreadMonitorController {
     }
 
     @PostMapping(value = ["/monitor/thread/update"], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])
-    fun update(@RequestBody updateVO: ThreadPoolExecutorUpdateVO): ResponseEntity<BooleanResult> {
+    fun update(@RequestParam(name = "beanName") beanName: String,
+               @RequestParam(name = "corePoolSize") corePoolSize: Int,
+               @RequestParam(name = "maximumPoolSize") maximumPoolSize: Int,
+               @RequestParam(name = "keepAliveSecond") keepAliveSecond: Long,
+               @RequestParam(name = "allowCoreThreadTimeOut") allowCoreThreadTimeOut: Boolean): ResponseEntity<BooleanResult> {
+        val updateVO = ThreadPoolExecutorUpdateVO(beanName, corePoolSize, maximumPoolSize, keepAliveSecond, allowCoreThreadTimeOut)
         return ResponseEntity.ok(BooleanResult(threadMonitorManager.updateThreadPoolExecutor(updateVO)))
     }
 }

@@ -36,8 +36,8 @@
                 <td>{{$value.largestPoolSize}}</td>
                 <td>{{$value.poolSize}}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="purgeTaskQueue(this)">清空任务队列</button>
-                    <button class="btn btn-primary btn-sm">更新线程池属性</button>
+                    <button style="margin: 5px" class="btn btn-primary btn-sm" onclick="purgeTaskQueue(this)">清空任务队列</button>
+                    <button class="btn btn-primary btn-sm" onclick="updateThreadPool(this)">更新线程池属性</button>
                 </td>
             </tr>
             {{/each}}
